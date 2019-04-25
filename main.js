@@ -2,7 +2,7 @@ var panel = $("#quiz-area")
 var countStartNumber = 30;
 
 //Question set 
-var question =[
+var question = [
 
     {
         question: "What year did BTS debut?",
@@ -10,19 +10,20 @@ var question =[
         correctAnswer: "2013",
         image: "assets\bts gif debut.gif"
     },
+
     {
         question: "Which BTS album was number one in the Billboard 200 Chart in 2018?",
         answers:["Wings", "Love Yourself: Her", "Love Yourself: Tear"],
         correctAnswer: "Love Yourself: Tear",
         image: "assets\bts gif billboard.gif"
 
-    },
+    }
 ]
 
-    //Variable to hold out setInterval
-    var timer;
+//Variable to hold out setInterval
+var timer;
 
-    var game = {
+var game = {
 
         questions: questions,
         currentQuestion: 0,
@@ -86,6 +87,49 @@ var question =[
             panel.append("<br><button id= 'start-over'>Start Over?</button>");
         },
 
+        clicked: function(e) {
+            clearInterval(timer);
+            if($(e.target).attr("data-name")===question[this.currentQuestion].correctAnswer){
+                this.answeredIncorrectly();
+            }
+            else{
+                this.answeredIncorrectly();
+            }
+        },
+
+        answeredIncorrectly: function(){
+            game.Incorrect++;
+            clearInterval(timer);
+            panel.html("<h2>NOPE</h2>")
+            panel.append("<h3>The correct answer was:" + question[game.correctAnswer].correctAnswer + "</h3>")
+            panel.append("<img = src'" + questions[game.currentQuestion].image + "/>")
+            if (game.currentQuestion === questions.length -1)
+            {
+                setTimeout(game.results, 3 * 1000);
+            }
+            else{
+                setTimeout(game.realQuestion, 3 * 1000);
+            },
+
+            answeredCorrectly: function()
+            panel.html("<h2>CORRECT</h2>");
+            panel.append("<img = src'" + questions[game.currentQuestion].image + "/>");
+            if (game.currentQuestion === questions.length -1)
+            {
+                setTimeout(game.results, 3 * 1000);
+            }
+            else{
+                setTimeout(game.realQuestion, 3 * 1000);
+            },
+
+            reset: function(){
+                this.currentQuestion = 0;
+                this.counter = coutStarNumber;
+                this.correct = 0;
+                this.Incorrect = 0;
+                this.loadQuestion()
+            },           
+        }
 
 
 
@@ -97,4 +141,3 @@ var question =[
 
 
 
-]
