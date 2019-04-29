@@ -67,11 +67,11 @@ var game = {
 
             if (game.currentQuestion === questions.length -1)
                 {
-                    setTimeout(game.results, 3*1000);
+                    setTimeout(game.results, 3 * 1000);
                 }
                 else 
                 {
-                    setTimeout(game.nextQuestion, 3*1000);
+                    setTimeout(game.nextQuestion, 3 * 1000);
                 }
         },
 
@@ -109,27 +109,34 @@ var game = {
             }
             else{
                 setTimeout(game.realQuestion, 3 * 1000);
-            },
+            }
+        
+        },
+        
+        answeredCorrectly: function() {
+            game.correct++;
+            clearInterval(timer);
 
-            answeredCorrectly: function()
             panel.html("<h2>CORRECT</h2>");
             panel.append("<img = src'" + questions[game.currentQuestion].image + "/>");
+            
             if (game.currentQuestion === questions.length -1)
             {
                 setTimeout(game.results, 3 * 1000);
             }
             else{
                 setTimeout(game.realQuestion, 3 * 1000);
-            },
+            }
+        },
 
-            reset: function(){
-                this.currentQuestion = 0;
-                this.counter = coutStarNumber;
-                this.correct = 0;
-                this.Incorrect = 0;
-                this.loadQuestion()
-            },           
-        }
+        reset: function(){
+            this.currentQuestion = 0;
+            this.counter = coutStarNumber;
+            this.correct = 0;
+            this.Incorrect = 0;
+            this.loadQuestion()
+        }          
+        
 
 
 
